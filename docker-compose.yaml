@@ -1,0 +1,26 @@
+version: "3.8"
+services:  
+  envoy.localhost:
+    image: envoyproxy/envoy:debug-v1.30.2
+    volumes:
+      - ./envoy/envoy.yaml:/etc/envoy.yaml
+    ports:
+      - "4444:10000"
+    command: [
+      "/usr/local/bin/envoy", 
+      "-c /etc/envoy.yaml", 
+      #"--log-level debug"
+    ]
+
+  sshserver:
+    image: lscr.io/linuxserver/openssh-server:version-9.7_p1-r3
+    ports:
+      - "2222:2222"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - PASSWORD_ACCESS=true
+      - USER_NAME=admin
+      - USER_PASSWORD=admin
+      - LOG_STDOUT=true
+
