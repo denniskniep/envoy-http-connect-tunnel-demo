@@ -1,9 +1,9 @@
 # Overview
-Using [Envoyproxy](https://www.envoyproxy.io) to tunnel tcp traffic (in this case ssh) through http. This is done through an HTTPConnect.
+Using [Envoyproxy](https://www.envoyproxy.io) to tunnel tcp traffic (in this case ssh) through http. This is done through an HTTPConnect Proxy.
 
 [SSH-Client] --tcp--> [HTTP-Connect-Proxy-Client] --tcpOverHttp--> [Envoy] --tcp--> [SSH-Server]
 
-# Run
+# Run Demo
 ```
 docker-compose up
 ```

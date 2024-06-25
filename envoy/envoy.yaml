@@ -1,6 +1,9 @@
 # This configuration terminates a CONNECT request and sends the CONNECT payload upstream.
 # It can be used to test TCP tunneling as described in
 # https://envoyproxy.io/docs/envoy/latest/intro/arch_overview/http/upgrades
+admin:
+  address:
+    socket_address: { address: 0.0.0.0, port_value: 9901 }
 static_resources:
   listeners:
   - name: listener_0
@@ -29,7 +32,9 @@ static_resources:
                     method: "%REQ(:METHOD)%"
                     code: "%RESPONSE_CODE%"
                     UpstreamHost: "%UPSTREAM_HOST%"
-                    protocol: "%PROTOCOL%"       
+                    protocol: "%PROTOCOL%" 
+                    path: "%REQ(:PATH)%"  
+                    userAgent: "%REQ(USER-AGENT)%"     
           stat_prefix: ingress_http
           route_config:
             name: local_route
@@ -51,10 +56,10 @@ static_resources:
           - name: envoy.filters.http.router
             typed_config:
               "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
-          http2_protocol_options:
-            allow_connect: true
-          upgrade_configs:
-          - upgrade_type: CONNECT
+##          http2_protocol_options:
+##            allow_connect: true
+##          upgrade_configs:
+##          - upgrade_type: CONNECT
   clusters:
   - name: myservice
     connect_timeout: 0.25s

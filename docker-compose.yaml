@@ -6,6 +6,7 @@ services:
       - ./envoy/envoy.yaml:/etc/envoy.yaml
     ports:
       - "4444:10000"
+      - "9901:9901"
     command: [
       "/usr/local/bin/envoy", 
       "-c /etc/envoy.yaml", 
