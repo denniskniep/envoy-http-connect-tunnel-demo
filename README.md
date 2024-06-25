@@ -4,10 +4,13 @@ Using [Envoyproxy](https://www.envoyproxy.io) to tunnel tcp traffic (in this cas
 [SSH-Client] --tcp--> [HTTP-Connect-Proxy-Client] --tcpOverHttp--> [Envoy] --tcp--> [SSH-Server]
 
 # Run Demo
+
+Start Envoy & SSH-Server 
 ```
 docker-compose up
 ```
 
+Install and run [HTTP-Connect-Proxy-Client](https://github.com/denniskniep/http-connect-proxy-client)
 ```
 go install github.com/denniskniep/http-connect-proxy-client@latest
 
